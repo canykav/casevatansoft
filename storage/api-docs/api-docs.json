@@ -61,6 +61,67 @@
                 }
             }
         },
+        "/api/auth/register": {
+            "post": {
+                "summary": "Create new user",
+                "description": "/*",
+                "operationId": "d764dd091cc4494ae0baf360b03319f3",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "User email",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "email"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "User name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "User password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An example resource",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "status",
+                                            "type": "boolean",
+                                            "default": "success"
+                                        },
+                                        "message": {
+                                            "description": "message",
+                                            "type": "string",
+                                            "default": "User has successfully created."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/auth/me": {
             "get": {
                 "summary": "Get logged in user information",

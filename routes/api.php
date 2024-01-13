@@ -22,6 +22,7 @@ use App\Http\Controllers\MessageReportController;
 // });
 
 Route::post('auth/login', [AuthController::class, 'login']);
+Route::post('auth/register', [AuthController::class, 'register']);
 
 Route::group([
     'middleware' => 'auth',

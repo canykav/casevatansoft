@@ -17,11 +17,6 @@ Komutu proje dizininde çalıştırın:
 
     php artisan migrate
 
-Test user için SQL insert komutu:
-Kullanıcı adı test@test.com şifre 123456 olan user oluşturur.
-
-    INSERT INTO  `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES (1, 'can', 'test@test.com', NULL, '$2y$10$sVnkWMvpiMqe67eJecHP1OlVnEDCCihtHR1e99NVBrdFMxs2ymZum', NULL, NULL, NULL);
-
 ## Jobs Dosyası
 app/Jobs/MessageSending.php dosyasıdır.
 İşleyişi:
@@ -36,4 +31,5 @@ tests/Unit/CheckMessageTest.php dosyasıdır.
 ## Swagger Dokümanı
 
 http://localhost:8000/api/documentation adresinden erişilebilir. Controller dosyaları içinde yazılmıştır.
-![enter image description here](https://i.hizliresim.com/nbht9sp.jpg)
+
+![enter image description here](https://i.hizliresim.com/ksfgnpk.jpg)

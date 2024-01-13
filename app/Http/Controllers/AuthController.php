@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -15,7 +17,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login','register']]);
     }
 
     /**
@@ -69,7 +71,6 @@ class AuthController extends Controller
      */
     public function login(Request $req)
     {
-        // dd($req->all());
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
@@ -77,6 +78,75 @@ class AuthController extends Controller
         }
 
         return $this->respondWithToken($token);
+    }
+
+    
+    /**
+     * Create a user..
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    /**
+/*
+    * @OA\Post(
+        *     path="/api/auth/register",
+        *     summary="Create new user",
+        *     @OA\Parameter(
+        *         name="email",
+        *         in="query",
+        *         description="User email",
+        *         required=true,
+        *         @OA\Schema(type="string",format="email")
+        *     ),
+        *     @OA\Parameter(
+        *         name="name",
+        *         in="query",
+        *         description="User name",
+        *         required=true,
+        *         @OA\Schema(type="string")
+        *     ),        
+        *     @OA\Parameter(
+        *         name="password",
+        *         in="query",
+        *         description="User password",
+        *         required=true,
+        *         @OA\Schema(type="string")
+        *     ),
+         *     @OA\Response(
+ *          response="200",
+ *          description="An example resource",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(
+ *                  type="boolean",
+ *                  default="success",
+ *                  description="status",
+ *                  property="status"
+ *              ),
+ *  *              @OA\Property(
+ *                  type="string",
+ *                  default="User has successfully created.",
+ *                  description="message",
+ *                  property="message"
+ *              ),
+ *          )
+ *     ),      * )
+        */
+    public function register(Request $req)
+    {
+        $req->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        User::create([
+            'name' => $req->name,
+            'email' => $req->email,
+            'password' => Hash::make($req->password),
+        ]);
+
+        return response()->json(['status' => 'success', 'message' => 'User has successfully created.']);
     }
 
     /**
